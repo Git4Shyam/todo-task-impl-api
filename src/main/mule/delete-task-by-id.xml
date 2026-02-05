@@ -1,0 +1,12 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd     http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+	http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+    <sub-flow name="delete-task-by-id-subflow">
+        <logger doc:name="START" doc:id="vzsswv" message="START - Delete task by ID"/>
+        <flow-ref doc:name="global:get-task-by-id-subflow" name="global:get-task-by-id-subflow"/>
+        <db:delete doc:name="Delete Task by ID" doc:id="byqzzw" config-ref="Mysql_Database-Config">
+            <db:sql><![CDATA[DELETE FROM tasks WHERE id = :taskId;]]></db:sql>
+            <db:input-parameters><![CDATA[#[vars.taskId]]]></db:input-parameters>    
+        </db:delete>
+        <logger doc:name="END" doc:id="oikjry" message="END - Delete task by ID"/></sub-flow>
+</mule>
